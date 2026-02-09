@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@juanknows_ph | Knowledge for the Modern Filipino</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>@</text></svg>">
+    
+    <!-- Tailwind CSS for Layout Structure -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Merriweather:ital,wght@0,700;1,400&family=Oswald:wght@500&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Snapshot Engine -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <style>
+        /* --- GLOBAL & UTILITIES --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* --- THE CARD ENGINE --- */
+        .card-wrapper {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .card-wrapper.active {
+            transform: scale(1.02);
+            z-index: 20;
+        }
+
+        .card-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            border: 2px solid transparent; 
+        }
+
+        .card-wrapper.active .card-container {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            border-color: #000;
+        }
+
+        .card-header { padding: 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; }
+        .card-body { flex: 1; padding: 0 1.5rem; display: flex; flex-direction: column; justify-content: center; }
+        .card-footer { padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; opacity: 0.8; }
+
+        /* --- ACTION BUTTONS (Share/Download) --- */
+        .action-group {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 30;
+            
+            /* Hidden by default */
+            opacity: 0;
+            transform: translateY(10px) scale(0.9);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Visible when wrapper is active */
+        .card-wrapper.active .action-group {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .action-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .action-btn:hover { transform: scale(1.15); }
+        .btn-fb { background: #1877F2; }
+        .btn-messenger { background: linear-gradient(45deg, #00B2FF, #006AFF); }
+        .btn-download { background: #374151; }
+        .card-wrapper.active .btn-download { background: #000; }
+
+        /* --- CATEGORY THEMES --- */
+        .theme-bible { background: linear-gradient(135deg, #2e1065 0%, #4c1d95 100%); color: #fef3c7; font-family: 'Merriweather', serif; }
+        .theme-bible .accent-text { color: #fbbf24; }
+
+        .theme-workplace { background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%); color: #ffffff; font-family: 'Inter', sans-serif; }
+        .theme-workplace .accent-text { color: #60a5fa; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+
+        .theme-public { background: #1f2937; color: #f3f4f6; border: 4px solid #facc15; }
+        .theme-public .accent-text { color: #facc15; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.5rem; }
+
+        .theme-law { background: #fdf6e3; color: #1a1a1a; border-top: 8px solid #78350f; }
+        .theme-law .card-header h3 { color: #78350f; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
+
+        .theme-medical { background: linear-gradient(to bottom right, #ccfbf1, #99f6e4); color: #0f766e; }
+        .theme-medical .accent-text { background: white; padding: 2px 8px; border-radius: 4px; color: #0d9488; font-weight: bold;}
+
+        .theme-inspiration { background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); color: #881337; font-family: 'Merriweather', serif; font-style: italic; }
+
+        .theme-cyber { background: #000000; color: #00ff00; font-family: 'Roboto Mono', monospace; border: 1px solid #00ff00; }
+        .theme-cyber .accent-text { text-shadow: 0 0 5px #00ff00; }
+
+        .theme-health { background: linear-gradient(180deg, #dcfce7 0%, #bbf7d0 100%); color: #14532d; }
+        .theme-health .accent-text { color: #15803d; font-weight: 800; }
+
+        .theme-household { background: #ffedd5; color: #9a3412; border-bottom: 8px solid #ea580c; }
+
+        .theme-family { background: #eff6ff; color: #1e3a8a; border: 2px dashed #3b82f6; }
+
+        /* Loading Overlay */
+        #loading-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 9999;
+            flex-direction: column;
+        }
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            z-index: 10000;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="pb-20">
+
+    <!-- HEADER -->
+    <header class="bg-white border-b sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-center items-center h-16">
+                <div class="text-center">
+                    <h1 class="font-bold text-2xl tracking-tight text-gray-900">@juanknows_ph</h1>
+                    <p class="text-xs text-gray-500">Knowledge for the Modern Filipino</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="bg-white shadow-sm sticky top-16 z-30">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-1" id="category-filters">
+                <button onclick="filterContent('all')" class="category-btn active px-4 py-2 rounded-full text-sm font-medium bg-black text-white whitespace-nowrap transition-colors">All Topics</button>
+                <button onclick="filterContent('Bible')" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-colors">Bible</button>
+                <button onclick="filterContent('Workplace')" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-colors">Workplace</button>
+                <button onclick="filterContent('Public')" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-colors">Public</button>
+                <button onclick="filterContent('Law')" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-colors">Law</button>
+                <button onclick="filterContent('Medical')" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-colors">Medical</button>
+                <button onclick="filterContent('Inspiration')" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-colors">Inspiration</button>
+                <button onclick="filterContent('Cyber-world')" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-colors">Cyber-world</button>
+                <button onclick="filterContent('Health')" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-colors">Health</button>
+                <button onclick="filterContent('Household')" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-colors">Household</button>
+                <button onclick="filterContent('Family')" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-colors">Family</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT GRID -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div id="card-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            
+            <!-- CARD 1: BIBLE -->
+            <div class="card-wrapper" data-category="Bible" onclick="selectCard(this)">
+                <div class="card-container theme-bible" id="card-1">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest opacity-75">Faith vs Culture</span>
+                        <i class="fas fa-book-bible text-xl opacity-50"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-2xl font-bold mb-4 leading-tight">3 Cultural Habits the Bible Actually Forbids</h2>
+                        <ul class="space-y-3 text-sm opacity-90">
+                            <li class="flex items-start"><span class="mr-2 accent-text">1.</span> Consulting Horoscopes & Fortune Tellers</li>
+                            <li class="flex items-start"><span class="mr-2 accent-text">2.</span> Superstitious Beliefs (Pamahiin)</li>
+                            <li class="flex items-start"><span class="mr-2 accent-text">3.</span> Gossiping disguised as "Prayer Requests"</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>#FaithOverFear</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-1', 'JuanKnows_Bible', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-1', 'JuanKnows_Bible', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-1', 'JuanKnows_Bible', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 11: BIBLE (NEW) -->
+            <div class="card-wrapper" data-category="Bible" onclick="selectCard(this)">
+                <div class="card-container theme-bible" id="card-11">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest opacity-75">Debunked</span>
+                        <i class="fas fa-book-open text-xl opacity-50"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-4">"God helps those who help themselves."</h2>
+                        <div class="text-sm opacity-90 space-y-4">
+                            <p class="italic border-l-2 border-yellow-400 pl-3">Is this in the Bible?</p>
+                            <p class="font-bold accent-text text-lg">NO.</p>
+                            <p>It was actually popularized by <span class="font-bold">Benjamin Franklin</span>.</p>
+                            <p>The Bible actually teaches: <br> <span class="italic">"God helps the helpless." (Isaiah 25:4)</span></p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#BibleMyths</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-11', 'JuanKnows_Bible_Myth', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-11', 'JuanKnows_Bible_Myth', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-11', 'JuanKnows_Bible_Myth', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 2: WORKPLACE -->
+            <div class="card-wrapper" data-category="Workplace" onclick="selectCard(this)">
+                <div class="card-container theme-workplace" id="card-2">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest opacity-75">Career Mode</span>
+                        <i class="fas fa-briefcase text-xl opacity-50"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-4">5 Things to Consider Before Resigning</h2>
+                        <div class="space-y-2 text-sm">
+                            <p class="border-l-2 border-blue-400 pl-3">Do you have an <span class="accent-text">Emergency Fund</span> for 3 months?</p>
+                            <p class="border-l-2 border-blue-400 pl-3">Is there a written <span class="accent-text">Job Offer</span> waiting?</p>
+                            <p class="border-l-2 border-blue-400 pl-3">Are you leaving because of the <span class="accent-text">Boss</span> or the Work?</p>
+                            <p class="border-l-2 border-blue-400 pl-3">Have you used your <span class="accent-text">HMO</span> yet?</p>
+                            <p class="border-l-2 border-blue-400 pl-3">Are you burning a <span class="accent-text">Bridge</span>?</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#CareerAdvice</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-2', 'JuanKnows_Workplace', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-2', 'JuanKnows_Workplace', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-2', 'JuanKnows_Workplace', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 12: WORKPLACE (NEW) -->
+            <div class="card-wrapper" data-category="Workplace" onclick="selectCard(this)">
+                <div class="card-container theme-workplace" id="card-12">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest opacity-75">Email Etiquette</span>
+                        <i class="fas fa-envelope text-xl opacity-50"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-4">Are you sounding Passive-Aggressive?</h2>
+                        <div class="space-y-3 text-sm">
+                            <div>
+                                <p class="accent-text text-xs">INSTEAD OF:</p>
+                                <p>"Per my last email"</p>
+                            </div>
+                            <div>
+                                <p class="accent-text text-xs">TRY:</p>
+                                <p>"Re-attaching the details here for easier reference."</p>
+                            </div>
+                            <div class="pt-2">
+                                <p class="accent-text text-xs">INSTEAD OF:</p>
+                                <p>"As previously stated"</p>
+                            </div>
+                            <div>
+                                <p class="accent-text text-xs">TRY:</p>
+                                <p>"To clarify my earlier point..."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#WorkHacks</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-12', 'JuanKnows_EmailEtiquette', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-12', 'JuanKnows_EmailEtiquette', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-12', 'JuanKnows_EmailEtiquette', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 3: PUBLIC -->
+            <div class="card-wrapper" data-category="Public" onclick="selectCard(this)">
+                <div class="card-container theme-public" id="card-3">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest text-yellow-400">Civic Duty</span>
+                        <i class="fas fa-users text-xl text-yellow-400"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="text-3xl font-bold mb-2 uppercase accent-text">Respect the Space</h2>
+                        <h3 class="text-sm mb-6 text-gray-400">10 Rules of Etiquette</h3>
+                        <div class="text-left text-sm space-y-1 font-mono">
+                            <p>1. Don't block the escalator left side.</p>
+                            <p>2. Wait for people to exit the elevator.</p>
+                            <p>3. Headphones on, volume down.</p>
+                            <p>4. Return your food tray.</p>
+                            <p class="text-yellow-400">5. Say "Thank You" to guards.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="text-yellow-400">#BeCivil</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-3', 'JuanKnows_Public', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-3', 'JuanKnows_Public', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-3', 'JuanKnows_Public', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 13: PUBLIC (NEW) -->
+            <div class="card-wrapper" data-category="Public" onclick="selectCard(this)">
+                <div class="card-container theme-public" id="card-13">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest text-yellow-400">Commute Mode</span>
+                        <i class="fas fa-bus text-xl text-yellow-400"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-2xl font-bold mb-4 uppercase accent-text">Jeepney Etiquette 101</h2>
+                        <ul class="text-sm space-y-3 font-mono">
+                            <li class="flex items-start">
+                                <span class="text-yellow-400 mr-2">></span>
+                                <span>Kapag nagpa-abot ng bayad, say <strong>"Makikisuyo po."</strong></span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-400 mr-2">></span>
+                                <span>Sit properly. Don't "manspread" & take up 2 seats.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-400 mr-2">></span>
+                                <span>Help the elderly/PWD board the jeep.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-400 mr-2">></span>
+                                <span>Hold your hair if it's windy.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="text-yellow-400">#Biyahero</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-13', 'JuanKnows_Jeepney', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-13', 'JuanKnows_Jeepney', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-13', 'JuanKnows_Jeepney', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 4: LAW -->
+            <div class="card-wrapper" data-category="Law" onclick="selectCard(this)">
+                <div class="card-container theme-law" id="card-4">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest font-bold">Republic Acts</span>
+                        <i class="fas fa-scale-balanced text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="border-b-2 border-black mb-4 pb-2">
+                            <h2 class="text-xl font-bold">10 Philippine Laws Every Juan Should Know</h2>
+                        </div>
+                        <ul class="text-sm space-y-3 font-serif">
+                            <li><strong>RA 11313:</strong> Safe Spaces Act (Bawal Bastos)</li>
+                            <li><strong>RA 10175:</strong> Cybercrime Prevention Act</li>
+                            <li><strong>RA 10963:</strong> TRAIN Law (Tax Reform)</li>
+                            <li><strong>RA 9262:</strong> Violence Against Women & Children</li>
+                            <li><strong>RA 9994:</strong> Expanded Senior Citizens Act</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>#KnowYourRights</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-4', 'JuanKnows_Law', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-4', 'JuanKnows_Law', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-4', 'JuanKnows_Law', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 14: LAW (NEW) -->
+            <div class="card-wrapper" data-category="Law" onclick="selectCard(this)">
+                <div class="card-container theme-law" id="card-14">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest font-bold">Consumer Rights</span>
+                        <i class="fas fa-gavel text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-2xl font-bold mb-4 text-center" style="color:#78350f">"NO RETURN,<br>NO EXCHANGE"</h2>
+                        <div class="text-center space-y-4 font-serif">
+                            <p class="text-lg font-bold">Is this policy legal?</p>
+                            <p class="text-4xl font-bold">NO.</p>
+                            <p class="text-sm italic">According to the <br><strong>Consumer Act of the Philippines (RA 7394)</strong></p>
+                            <p class="text-xs text-left mt-4 border-t border-amber-900 pt-2">
+                                If an item is defective, stores <strong>MUST</strong> offer a replacement, repair, or refund. They cannot post "No Return" signs to evade liability.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#DTI</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-14', 'JuanKnows_NoReturn', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-14', 'JuanKnows_NoReturn', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-14', 'JuanKnows_NoReturn', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 5: MEDICAL -->
+            <div class="card-wrapper" data-category="Medical" onclick="selectCard(this)">
+                <div class="card-container theme-medical" id="card-5">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest font-bold">Anatomy 101</span>
+                        <i class="fas fa-user-doctor text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-6 text-center text-teal-900">5 Body Parts You didn't Know Had Names</h2>
+                        <div class="space-y-4 text-sm font-medium">
+                            <div class="flex justify-between items-center border-b border-teal-200 pb-1">
+                                <span>Space between eyebrows</span>
+                                <span class="accent-text">Glabella</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-teal-200 pb-1">
+                                <span>Groove under nose</span>
+                                <span class="accent-text">Philtrum</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-teal-200 pb-1">
+                                <span>Pale moon on fingernail</span>
+                                <span class="accent-text">Lunula</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-teal-200 pb-1">
+                                <span>Armpit hollow</span>
+                                <span class="accent-text">Axilla</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#MedTrivia</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-5', 'JuanKnows_Medical', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-5', 'JuanKnows_Medical', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-5', 'JuanKnows_Medical', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 15: MEDICAL (NEW) -->
+            <div class="card-wrapper" data-category="Medical" onclick="selectCard(this)">
+                <div class="card-container theme-medical" id="card-15">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest font-bold">First Aid</span>
+                        <i class="fas fa-temperature-arrow-up text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-4 text-teal-900">Heat Exhaustion vs. Heat Stroke</h2>
+                        <div class="grid grid-cols-2 gap-4 text-xs">
+                            <div class="bg-white bg-opacity-50 p-2 rounded">
+                                <h3 class="font-bold text-teal-800 mb-2">EXHAUSTION</h3>
+                                <ul class="space-y-1">
+                                    <li>• Faint / Dizzy</li>
+                                    <li>• Excessive Sweating</li>
+                                    <li>• Cool, pale skin</li>
+                                    <li>• Rapid, weak pulse</li>
+                                </ul>
+                            </div>
+                            <div class="bg-red-100 bg-opacity-80 p-2 rounded border border-red-200">
+                                <h3 class="font-bold text-red-800 mb-2">STROKE 🚑</h3>
+                                <ul class="space-y-1 text-red-900">
+                                    <li>• Throbbing headache</li>
+                                    <li>• <span class="font-bold">NO Sweating</span></li>
+                                    <li>• Red, hot, dry skin</li>
+                                    <li>• Call 911 immediately</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#SummerSafety</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-15', 'JuanKnows_HeatStroke', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-15', 'JuanKnows_HeatStroke', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-15', 'JuanKnows_HeatStroke', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 6: INSPIRATION -->
+            <div class="card-wrapper" data-category="Inspiration" onclick="selectCard(this)">
+                <div class="card-container theme-inspiration" id="card-6">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest not-italic">Daily Light</span>
+                        <i class="fas fa-sun text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="text-3xl font-bold mb-8 leading-snug">"Gratitude turns what we have into enough."</h2>
+                        <p class="text-sm not-italic uppercase tracking-widest font-bold mb-4">3 Reasons to Wake Up Grateful</p>
+                        <div class="text-sm not-italic space-y-1">
+                            <p>1. Breath in your lungs.</p>
+                            <p>2. A new chance to try again.</p>
+                            <p>3. Coffee in your cup.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer not-italic">
+                        <span>#MorningVibes</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-6', 'JuanKnows_Inspiration', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-6', 'JuanKnows_Inspiration', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-6', 'JuanKnows_Inspiration', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 16: INSPIRATION (NEW) -->
+            <div class="card-wrapper" data-category="Inspiration" onclick="selectCard(this)">
+                <div class="card-container theme-inspiration" id="card-16">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest not-italic">Self Care</span>
+                        <i class="fas fa-moon text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="text-3xl font-bold mb-6 leading-snug">"It is okay to rest."</h2>
+                        <div class="text-sm not-italic space-y-4 px-4">
+                            <p>You are not a machine. You are a human being.</p>
+                            <p class="font-bold border-t border-pink-300 pt-4">Rest is not laziness.</p>
+                            <p>Rest is a necessary investment in your future energy.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer not-italic">
+                        <span>#Pause</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-16', 'JuanKnows_Rest', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-16', 'JuanKnows_Rest', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-16', 'JuanKnows_Rest', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 7: CYBER-WORLD -->
+            <div class="card-wrapper" data-category="Cyber-world" onclick="selectCard(this)">
+                <div class="card-container theme-cyber" id="card-7">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">> SYSTEM_CHECK</span>
+                        <i class="fas fa-wifi text-xl"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-4 text-green-400">> HOW TO SPOT FAKE NEWS IN 30 SECONDS</h2>
+                        <ul class="text-xs space-y-4 font-mono">
+                            <li>
+                                <span class="bg-green-900 text-white px-1">CHECK URL:</span>
+                                <br>Is it bbc.com or bbc-news.ph.co?
+                            </li>
+                            <li>
+                                <span class="bg-green-900 text-white px-1">CHECK AUTHOR:</span>
+                                <br>Is it a real journalist or "Admin"?
+                            </li>
+                            <li>
+                                <span class="bg-green-900 text-white px-1">CHECK EMOTION:</span>
+                                <br>Does the headline make you incredibly angry? It's likely bait.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>#ThinkBeforeClick</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-7', 'JuanKnows_Cyber', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-7', 'JuanKnows_Cyber', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-7', 'JuanKnows_Cyber', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 17: CYBER-WORLD (NEW) -->
+            <div class="card-wrapper" data-category="Cyber-world" onclick="selectCard(this)">
+                <div class="card-container theme-cyber" id="card-17">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">> SECURITY_ALERT</span>
+                        <i class="fas fa-lock text-xl"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-4 text-green-400">> PASSWORD CHECK</h2>
+                        <div class="text-xs space-y-4 font-mono">
+                            <p class="text-red-500">WEAK:</p>
+                            <p>123456, password, iloveyou, your birthday.</p>
+                            <div class="border-t border-green-700 my-2"></div>
+                            <p class="text-green-400">STRONG:</p>
+                            <ul class="list-disc list-inside">
+                                <li>At least 12 characters</li>
+                                <li>Mix of Upper/Lower case</li>
+                                <li>Use a phrase: "BlueCoffee$RunsFast!"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#CyberSafe</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-17', 'JuanKnows_Password', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-17', 'JuanKnows_Password', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-17', 'JuanKnows_Password', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 8: HEALTH -->
+            <div class="card-wrapper" data-category="Health" onclick="selectCard(this)">
+                <div class="card-container theme-health" id="card-8">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">Wellness Check</span>
+                        <i class="fas fa-heart-pulse text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-2xl font-bold mb-4">Start the Morning Right</h2>
+                        <div class="grid grid-cols-1 gap-3 text-sm">
+                            <div class="bg-white bg-opacity-40 p-3 rounded-lg flex items-center">
+                                <i class="fas fa-glass-water mr-3 accent-text"></i>
+                                <span>Drink 500ml water immediately.</span>
+                            </div>
+                            <div class="bg-white bg-opacity-40 p-3 rounded-lg flex items-center">
+                                <i class="fas fa-sun mr-3 accent-text"></i>
+                                <span>Get 5-10 mins of sunlight.</span>
+                            </div>
+                            <div class="bg-white bg-opacity-40 p-3 rounded-lg flex items-center">
+                                <i class="fas fa-ban mr-3 accent-text"></i>
+                                <span>Delay caffeine for 90 mins.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#HealthyPinoy</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-8', 'JuanKnows_Health', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-8', 'JuanKnows_Health', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-8', 'JuanKnows_Health', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 18: HEALTH (NEW) -->
+            <div class="card-wrapper" data-category="Health" onclick="selectCard(this)">
+                <div class="card-container theme-health" id="card-18">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">Eye Care</span>
+                        <i class="fas fa-eye text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-2xl font-bold mb-4">The 20-20-20 Rule</h2>
+                        <p class="text-sm mb-4">For every <span class="font-bold accent-text">20 minutes</span> of looking at a screen:</p>
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-white bg-opacity-40 p-3 rounded-lg flex items-center">
+                                <i class="fas fa-clock mr-3 accent-text"></i>
+                                <span>Look away for <span class="font-bold">20 seconds</span>.</span>
+                            </div>
+                            <div class="bg-white bg-opacity-40 p-3 rounded-lg flex items-center">
+                                <i class="fas fa-ruler mr-3 accent-text"></i>
+                                <span>Look at something <span class="font-bold">20 feet</span> away.</span>
+                            </div>
+                        </div>
+                        <p class="text-xs mt-4 italic opacity-80">This prevents digital eye strain and headaches.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span>#EyeHealth</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-18', 'JuanKnows_EyeCare', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-18', 'JuanKnows_EyeCare', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-18', 'JuanKnows_EyeCare', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 9: HOUSEHOLD -->
+            <div class="card-wrapper" data-category="Household" onclick="selectCard(this)">
+                <div class="card-container theme-household" id="card-9">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">Home Hacks</span>
+                        <i class="fas fa-house-chimney text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-2xl font-bold mb-4">Make Groceries Last Longer</h2>
+                        <ul class="list-disc list-inside space-y-3 text-sm font-medium">
+                            <li>Wrap <strong>celery</strong> in foil to keep it crisp for weeks.</li>
+                            <li>Store <strong>onions</strong> in pantyhose (hung up) to prevent rot.</li>
+                            <li>Put a paper towel in the <strong>lettuce</strong> bag to absorb moisture.</li>
+                            <li>Keep <strong>bananas</strong> away from other fruits (they speed up ripening).</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>#WaisNaMisis</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-9', 'JuanKnows_Household', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-9', 'JuanKnows_Household', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-9', 'JuanKnows_Household', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 19: HOUSEHOLD (NEW) -->
+            <div class="card-wrapper" data-category="Household" onclick="selectCard(this)">
+                <div class="card-container theme-household" id="card-19">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">Fresh Home</span>
+                        <i class="fas fa-wind text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-2xl font-bold mb-4">DIY Natural Odor Absorbers</h2>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-orange-200 rounded-full flex items-center justify-center mr-3 font-bold text-orange-800">1</div>
+                                <span><strong>Coffee Grounds:</strong> Place in a bowl for fridge odors.</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-orange-200 rounded-full flex items-center justify-center mr-3 font-bold text-orange-800">2</div>
+                                <span><strong>Charcoal:</strong> Great for absorbing moisture in closets.</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-orange-200 rounded-full flex items-center justify-center mr-3 font-bold text-orange-800">3</div>
+                                <span><strong>Baking Soda:</strong> Sprinkle in shoes or trash cans.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#HomeTips</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-19', 'JuanKnows_OdorHack', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-19', 'JuanKnows_OdorHack', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-19', 'JuanKnows_OdorHack', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 10: FAMILY -->
+            <div class="card-wrapper" data-category="Family" onclick="selectCard(this)">
+                <div class="card-container theme-family" id="card-10">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">Ohana</span>
+                        <i class="fas fa-users-line text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="text-xl font-bold mb-6">5 Things We Take For Granted</h2>
+                        <div class="space-y-2 text-sm text-blue-900">
+                            <p>1. A home-cooked meal.</p>
+                            <p>2. Parents asking "Kumain ka na?"</p>
+                            <p>3. The noise of siblings.</p>
+                            <p>4. Safety inside the house.</p>
+                            <p>5. Time.</p>
+                        </div>
+                        <div class="mt-6 border-t border-blue-200 pt-4">
+                            <p class="text-xs italic text-gray-500">Call them today.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#Pamilya</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-10', 'JuanKnows_Family', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-10', 'JuanKnows_Family', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-10', 'JuanKnows_Family', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 20: FAMILY (NEW) -->
+            <div class="card-wrapper" data-category="Family" onclick="selectCard(this)">
+                <div class="card-container theme-family" id="card-20">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">Relationship</span>
+                        <i class="fas fa-heart text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-4 text-center">The 5 Love Languages</h2>
+                        <div class="grid grid-cols-1 gap-2 text-sm text-blue-900">
+                            <div class="bg-blue-50 p-2 rounded flex items-center">
+                                <i class="fas fa-comment-dots w-6 opacity-50"></i> <span>Words of Affirmation</span>
+                            </div>
+                            <div class="bg-blue-50 p-2 rounded flex items-center">
+                                <i class="fas fa-hands-holding-circle w-6 opacity-50"></i> <span>Acts of Service</span>
+                            </div>
+                            <div class="bg-blue-50 p-2 rounded flex items-center">
+                                <i class="fas fa-gift w-6 opacity-50"></i> <span>Receiving Gifts</span>
+                            </div>
+                            <div class="bg-blue-50 p-2 rounded flex items-center">
+                                <i class="fas fa-clock w-6 opacity-50"></i> <span>Quality Time</span>
+                            </div>
+                            <div class="bg-blue-50 p-2 rounded flex items-center">
+                                <i class="fas fa-hand-holding-heart w-6 opacity-50"></i> <span>Physical Touch</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#LoveLanguages</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-20', 'JuanKnows_LoveLanguages', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-20', 'JuanKnows_LoveLanguages', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-20', 'JuanKnows_LoveLanguages', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- LOADING OVERLAY -->
+    <div id="loading-overlay">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4"></div>
+        <p>Generating Snapshot...</p>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast">Image Saved!</div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // --- 1. FILTERING LOGIC ---
+        function filterContent(category) {
+            const allWrappers = document.querySelectorAll('.card-wrapper');
+            const buttons = document.querySelectorAll('.category-btn');
+
+            allWrappers.forEach(w => w.classList.remove('active'));
+
+            buttons.forEach(btn => {
+                if (btn.innerText === category || (category === 'all' && btn.innerText === 'All Topics')) {
+                    btn.classList.remove('bg-gray-100', 'text-gray-600');
+                    btn.classList.add('bg-black', 'text-white');
+                } else {
+                    btn.classList.add('bg-gray-100', 'text-gray-600');
+                    btn.classList.remove('bg-black', 'text-white');
+                }
+            });
+
+            allWrappers.forEach(wrapper => {
+                if (category === 'all' || wrapper.getAttribute('data-category') === category) {
+                    wrapper.style.display = 'block';
+                    wrapper.style.opacity = '0';
+                    setTimeout(() => wrapper.style.opacity = '1', 50);
+                } else {
+                    wrapper.style.display = 'none';
+                }
+            });
+        }
+
+        // --- 2. SELECTION LOGIC ---
+        function selectCard(wrapper) {
+            document.querySelectorAll('.card-wrapper').forEach(w => {
+                if (w !== wrapper) w.classList.remove('active');
+            });
+            wrapper.classList.toggle('active');
+        }
+
+        // --- 3. SHARED IMAGE LOGIC (Factory) ---
+        function shareImage(event, elementId, filename, platform) {
+            event.stopPropagation();
+            const overlay = document.getElementById('loading-overlay');
+            const element = document.getElementById(elementId);
+            const toast = document.getElementById('toast');
+
+            overlay.style.display = 'flex';
+
+            const options = {
+                scale: 3, 
+                useCORS: true,
+                backgroundColor: null,
+            };
+
+            html2canvas(element, options).then(canvas => {
+                // If it's a simple download
+                if (platform === 'download') {
+                    const link = document.createElement('a');
+                    link.download = `${filename}.png`;
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+                    overlay.style.display = 'none';
+                    return;
+                }
+
+                // If platform is social, try Web Share API first
+                canvas.toBlob(async (blob) => {
+                    const file = new File([blob], `${filename}.png`, { type: 'image/png' });
+
+                    // Check if navigator.share works (Mobile)
+                    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                        try {
+                            await navigator.share({
+                                files: [file],
+                                title: '@juanknows_ph',
+                                text: 'Check out this card from Juan Knows!'
+                            });
+                            overlay.style.display = 'none';
+                        } catch (err) {
+                            console.log('Share canceled or failed', err);
+                            overlay.style.display = 'none';
+                        }
+                    } else {
+                        // FALLBACK FOR DESKTOP: Download + Prompt
+                        const link = document.createElement('a');
+                        link.download = `${filename}.png`;
+                        link.href = canvas.toDataURL("image/png");
+                        link.click();
+
+                        overlay.style.display = 'none';
+                        
+                        // Show Custom Toast
+                        const platformName = platform.charAt(0).toUpperCase() + platform.slice(1);
+                        toast.innerText = `Image saved! Ready to upload to ${platformName}.`;
+                        toast.style.display = 'block';
+                        setTimeout(() => { toast.style.display = 'none'; }, 3000);
+                    }
+                }, 'image/png');
+
+            }).catch(err => {
+                console.error("Snapshot failed:", err);
+                overlay.style.display = 'none';
+                alert("Sorry, could not generate image.");
+            });
+        }
+    </script>
+</body>
+</html>
