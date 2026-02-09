@@ -66,9 +66,32 @@
             border-color: #000;
         }
 
-        .card-header { padding: 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; }
-        .card-body { flex: 1; padding: 0 1.5rem; display: flex; flex-direction: column; justify-content: center; }
-        .card-footer { padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; opacity: 0.8; }
+        .card-header { 
+            padding: 1.25rem; /* Optimized spacing */
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start;
+            flex-shrink: 0; 
+        }
+
+        .card-body { 
+            flex: 1; 
+            padding: 0 1.5rem 0.5rem 1.5rem; /* Added safe bottom padding */
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            overflow: hidden; /* Prevent spillover */
+        }
+
+        .card-footer { 
+            padding: 1.25rem; /* Optimized spacing */
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            font-size: 0.75rem; 
+            opacity: 0.8;
+            flex-shrink: 0;
+        }
 
         /* --- ACTION BUTTONS (Share/Download) --- */
         .action-group {
@@ -369,7 +392,7 @@
                     </div>
                     <div class="card-body">
                         <h2 class="text-2xl font-bold mb-4 uppercase accent-text">Jeepney Etiquette 101</h2>
-                        <ul class="text-sm space-y-3 font-mono">
+                        <ul class="text-sm space-y-2 font-mono"> <!-- Tightened spacing -->
                             <li class="flex items-start">
                                 <span class="text-yellow-400 mr-2">></span>
                                 <span>Kapag nagpa-abot ng bayad, say <strong>"Makikisuyo po."</strong></span>
@@ -607,7 +630,7 @@
                     </div>
                     <div class="card-body">
                         <h2 class="text-xl font-bold mb-4 text-green-400">> HOW TO SPOT FAKE NEWS IN 30 SECONDS</h2>
-                        <ul class="text-xs space-y-4 font-mono">
+                        <ul class="text-xs space-y-2 font-mono"> <!-- Tightened Spacing -->
                             <li>
                                 <span class="bg-green-900 text-white px-1">CHECK URL:</span>
                                 <br>Is it bbc.com or bbc-news.ph.co?
@@ -643,7 +666,7 @@
                     </div>
                     <div class="card-body">
                         <h2 class="text-xl font-bold mb-4 text-green-400">> PASSWORD CHECK</h2>
-                        <div class="text-xs space-y-4 font-mono">
+                        <div class="text-xs space-y-2 font-mono"> <!-- Tightened Spacing -->
                             <p class="text-red-500">WEAK:</p>
                             <p>123456, password, iloveyou, your birthday.</p>
                             <div class="border-t border-green-700 my-2"></div>
