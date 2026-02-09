@@ -67,7 +67,7 @@
         }
 
         .card-header { 
-            padding: 1rem 1.25rem; /* Reduced vertical padding */
+            padding: 1rem 1.25rem;
             display: flex; 
             justify-content: space-between; 
             align-items: flex-start;
@@ -84,7 +84,7 @@
         }
 
         .card-footer { 
-            padding: 1rem 1.25rem; /* Reduced vertical padding */
+            padding: 1rem 1.25rem;
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
@@ -131,10 +131,9 @@
         }
 
         .action-btn:hover { transform: scale(1.15); }
-        .btn-fb { background: #1877F2; }
-        .btn-messenger { background: linear-gradient(45deg, #00B2FF, #006AFF); }
+        .btn-share { background: #000; }
         .btn-download { background: #374151; }
-        .card-wrapper.active .btn-download { background: #000; }
+        .card-wrapper.active .btn-download { background: #4b5563; }
 
         /* --- CATEGORY THEMES --- */
         .theme-bible { background: linear-gradient(135deg, #2e1065 0%, #4c1d95 100%); color: #fef3c7; font-family: 'Merriweather', serif; }
@@ -251,8 +250,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-1', 'JuanKnows_Bible', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-1', 'JuanKnows_Bible', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-1', 'JuanKnows_Bible', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-1', 'JuanKnows_Bible', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -279,8 +277,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-11', 'JuanKnows_Bible_Myth', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-11', 'JuanKnows_Bible_Myth', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-11', 'JuanKnows_Bible_Myth', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-11', 'JuanKnows_Bible_Myth', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -308,8 +305,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-21', 'JuanKnows_MoneyEvil', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-21', 'JuanKnows_MoneyEvil', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-21', 'JuanKnows_MoneyEvil', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-21', 'JuanKnows_MoneyEvil', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -338,8 +334,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-2', 'JuanKnows_Workplace', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-2', 'JuanKnows_Workplace', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-2', 'JuanKnows_Workplace', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-2', 'JuanKnows_Workplace', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -378,8 +373,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-12', 'JuanKnows_EmailEtiquette', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-12', 'JuanKnows_EmailEtiquette', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-12', 'JuanKnows_EmailEtiquette', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-12', 'JuanKnows_EmailEtiquette', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -406,8 +400,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-22', 'JuanKnows_ImmediateResignation', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-22', 'JuanKnows_ImmediateResignation', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-22', 'JuanKnows_ImmediateResignation', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-22', 'JuanKnows_ImmediateResignation', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -422,7 +415,7 @@
                     </div>
                     <div class="card-body text-center">
                         <h2 class="text-2xl font-bold mb-2 uppercase accent-text">Respect the Space</h2>
-                        <h3 class="text-sm mb-4 text-gray-400">10 Rules of Etiquette</h3>
+                        <h3 class="text-sm mb-4 text-gray-400">5 Rules of Etiquette</h3>
                         <div class="text-left text-sm space-y-1 font-mono">
                             <p>1. Don't block the escalator left side.</p>
                             <p>2. Wait for people to exit the elevator.</p>
@@ -437,8 +430,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-3', 'JuanKnows_Public', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-3', 'JuanKnows_Public', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-3', 'JuanKnows_Public', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-3', 'JuanKnows_Public', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -477,8 +469,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-13', 'JuanKnows_Jeepney', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-13', 'JuanKnows_Jeepney', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-13', 'JuanKnows_Jeepney', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-13', 'JuanKnows_Jeepney', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -509,8 +500,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-23', 'JuanKnows_Cinema', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-23', 'JuanKnows_Cinema', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-23', 'JuanKnows_Cinema', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-23', 'JuanKnows_Cinema', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -541,8 +531,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-4', 'JuanKnows_Law', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-4', 'JuanKnows_Law', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-4', 'JuanKnows_Law', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-4', 'JuanKnows_Law', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -571,8 +560,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-14', 'JuanKnows_NoReturn', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-14', 'JuanKnows_NoReturn', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-14', 'JuanKnows_NoReturn', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-14', 'JuanKnows_NoReturn', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -601,8 +589,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-24', 'JuanKnows_Screenshots', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-24', 'JuanKnows_Screenshots', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-24', 'JuanKnows_Screenshots', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-24', 'JuanKnows_Screenshots', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -642,8 +629,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-5', 'JuanKnows_Medical', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-5', 'JuanKnows_Medical', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-5', 'JuanKnows_Medical', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-5', 'JuanKnows_Medical', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -684,8 +670,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-15', 'JuanKnows_HeatStroke', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-15', 'JuanKnows_HeatStroke', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-15', 'JuanKnows_HeatStroke', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-15', 'JuanKnows_HeatStroke', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -714,8 +699,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-25', 'JuanKnows_Antibiotics', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-25', 'JuanKnows_Antibiotics', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-25', 'JuanKnows_Antibiotics', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-25', 'JuanKnows_Antibiotics', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -743,8 +727,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-6', 'JuanKnows_Inspiration', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-6', 'JuanKnows_Inspiration', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-6', 'JuanKnows_Inspiration', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-6', 'JuanKnows_Inspiration', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -770,8 +753,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-16', 'JuanKnows_Rest', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-16', 'JuanKnows_Rest', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-16', 'JuanKnows_Rest', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-16', 'JuanKnows_Rest', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -798,8 +780,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-26', 'JuanKnows_5by5', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-26', 'JuanKnows_5by5', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-26', 'JuanKnows_5by5', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-26', 'JuanKnows_5by5', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -835,8 +816,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-7', 'JuanKnows_Cyber', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-7', 'JuanKnows_Cyber', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-7', 'JuanKnows_Cyber', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-7', 'JuanKnows_Cyber', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -868,8 +848,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-17', 'JuanKnows_Password', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-17', 'JuanKnows_Password', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-17', 'JuanKnows_Password', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-17', 'JuanKnows_Password', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -900,8 +879,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-27', 'JuanKnows_PublicWifi', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-27', 'JuanKnows_PublicWifi', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-27', 'JuanKnows_PublicWifi', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-27', 'JuanKnows_PublicWifi', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -937,8 +915,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-8', 'JuanKnows_Health', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-8', 'JuanKnows_Health', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-8', 'JuanKnows_Health', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-8', 'JuanKnows_Health', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -971,8 +948,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-18', 'JuanKnows_EyeCare', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-18', 'JuanKnows_EyeCare', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-18', 'JuanKnows_EyeCare', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-18', 'JuanKnows_EyeCare', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -1006,8 +982,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-28', 'JuanKnows_Rice', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-28', 'JuanKnows_Rice', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-28', 'JuanKnows_Rice', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-28', 'JuanKnows_Rice', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -1035,8 +1010,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-9', 'JuanKnows_Household', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-9', 'JuanKnows_Household', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-9', 'JuanKnows_Household', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-9', 'JuanKnows_Household', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -1071,8 +1045,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-19', 'JuanKnows_OdorHack', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-19', 'JuanKnows_OdorHack', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-19', 'JuanKnows_OdorHack', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-19', 'JuanKnows_OdorHack', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -1103,8 +1076,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-29', 'JuanKnows_BleachDanger', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-29', 'JuanKnows_BleachDanger', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-29', 'JuanKnows_BleachDanger', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-29', 'JuanKnows_BleachDanger', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -1136,8 +1108,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-10', 'JuanKnows_Family', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-10', 'JuanKnows_Family', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-10', 'JuanKnows_Family', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-10', 'JuanKnows_Family', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -1175,8 +1146,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-20', 'JuanKnows_LoveLanguages', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-20', 'JuanKnows_LoveLanguages', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-20', 'JuanKnows_LoveLanguages', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-20', 'JuanKnows_LoveLanguages', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -1202,8 +1172,7 @@
                     </div>
                 </div>
                 <div class="action-group">
-                    <button onclick="shareImage(event, 'card-30', 'JuanKnows_Retirement', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
-                    <button onclick="shareImage(event, 'card-30', 'JuanKnows_Retirement', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-30', 'JuanKnows_Retirement', 'share')" class="action-btn btn-share"><i class="fas fa-share-nodes"></i></button>
                     <button onclick="shareImage(event, 'card-30', 'JuanKnows_Retirement', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
@@ -1311,8 +1280,8 @@
                         overlay.style.display = 'none';
                         
                         // Show Custom Toast
-                        const platformName = platform.charAt(0).toUpperCase() + platform.slice(1);
-                        toast.innerText = `Image saved! Ready to upload to ${platformName}.`;
+                        const platformText = platform === 'share' ? 'share' : `upload to ${platform.charAt(0).toUpperCase() + platform.slice(1)}`;
+                        toast.innerText = `Image saved! Ready to ${platformText}.`;
                         toast.style.display = 'block';
                         setTimeout(() => { toast.style.display = 'none'; }, 3000);
                     }
