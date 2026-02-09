@@ -229,7 +229,8 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div id="card-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             
-            <!-- CARD 1: BIBLE -->
+            <!-- === CATEGORY: BIBLE === -->
+            <!-- CARD 1 -->
             <div class="card-wrapper" data-category="Bible" onclick="selectCard(this)">
                 <div class="card-container theme-bible" id="card-1">
                     <div class="card-header">
@@ -256,7 +257,7 @@
                 </div>
             </div>
 
-            <!-- CARD 11: BIBLE (NEW) -->
+            <!-- CARD 11 -->
             <div class="card-wrapper" data-category="Bible" onclick="selectCard(this)">
                 <div class="card-container theme-bible" id="card-11">
                     <div class="card-header">
@@ -284,7 +285,37 @@
                 </div>
             </div>
 
-            <!-- CARD 2: WORKPLACE -->
+            <!-- CARD 21 -->
+            <div class="card-wrapper" data-category="Bible" onclick="selectCard(this)">
+                <div class="card-container theme-bible" id="card-21">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest opacity-75">Context Matters</span>
+                        <i class="fas fa-coins text-xl opacity-50"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-lg font-bold mb-3">"Money is the root of all evil."</h2>
+                        <div class="text-sm opacity-90 space-y-3">
+                            <p class="border-l-2 border-yellow-400 pl-3 italic">Did the Bible say this?</p>
+                            <p class="font-bold accent-text text-lg">Not exactly.</p>
+                            <p>1 Timothy 6:10 says:</p>
+                            <p class="italic bg-purple-900 bg-opacity-30 p-2 rounded">"For the <span class="font-bold text-yellow-300">LOVE</span> of money is the root of all kinds of evil."</p>
+                            <p class="text-xs">Money is neutral. It is the obsession with it that destroys.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#BibleTruths</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-21', 'JuanKnows_MoneyEvil', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-21', 'JuanKnows_MoneyEvil', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-21', 'JuanKnows_MoneyEvil', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- === CATEGORY: WORKPLACE === -->
+            <!-- CARD 2 -->
             <div class="card-wrapper" data-category="Workplace" onclick="selectCard(this)">
                 <div class="card-container theme-workplace" id="card-2">
                     <div class="card-header">
@@ -313,7 +344,7 @@
                 </div>
             </div>
 
-            <!-- CARD 12: WORKPLACE (NEW) -->
+            <!-- CARD 12 -->
             <div class="card-wrapper" data-category="Workplace" onclick="selectCard(this)">
                 <div class="card-container theme-workplace" id="card-12">
                     <div class="card-header">
@@ -353,7 +384,36 @@
                 </div>
             </div>
 
-            <!-- CARD 3: PUBLIC -->
+            <!-- CARD 22 -->
+            <div class="card-wrapper" data-category="Workplace" onclick="selectCard(this)">
+                <div class="card-container theme-workplace" id="card-22">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest opacity-75">Labor Code</span>
+                        <i class="fas fa-door-open text-xl opacity-50"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-lg font-bold mb-3">Immediate Resignation?</h2>
+                        <p class="text-xs mb-3 opacity-80">Usually, you need to give 30 days notice. BUT, Art. 300 allows immediate exit if:</p>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex items-start"><span class="accent-text mr-2">1.</span> Serious insult by the employer.</li>
+                            <li class="flex items-start"><span class="accent-text mr-2">2.</span> Inhuman and unbearable treatment.</li>
+                            <li class="flex items-start"><span class="accent-text mr-2">3.</span> Crime committed against the employee.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>#LaborLaw</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-22', 'JuanKnows_ImmediateResignation', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-22', 'JuanKnows_ImmediateResignation', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-22', 'JuanKnows_ImmediateResignation', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- === CATEGORY: PUBLIC === -->
+            <!-- CARD 3 -->
             <div class="card-wrapper" data-category="Public" onclick="selectCard(this)">
                 <div class="card-container theme-public" id="card-3">
                     <div class="card-header">
@@ -383,7 +443,7 @@
                 </div>
             </div>
 
-            <!-- CARD 13: PUBLIC (NEW) -->
+            <!-- CARD 13 -->
             <div class="card-wrapper" data-category="Public" onclick="selectCard(this)">
                 <div class="card-container theme-public" id="card-13">
                     <div class="card-header">
@@ -423,7 +483,40 @@
                 </div>
             </div>
 
-            <!-- CARD 4: LAW -->
+            <!-- CARD 23 -->
+            <div class="card-wrapper" data-category="Public" onclick="selectCard(this)">
+                <div class="card-container theme-public" id="card-23">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest text-yellow-400">Entertainment</span>
+                        <i class="fas fa-film text-xl text-yellow-400"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-2xl font-bold mb-4 uppercase accent-text text-center">Cinema Etiquette</h2>
+                        <div class="space-y-4 text-sm font-mono">
+                            <div class="border-l-4 border-yellow-400 pl-3">
+                                <p class="font-bold text-yellow-400">BRIGHTNESS: 0%</p>
+                                <p>Checking your phone? Your screen is a lighthouse in a dark room. Stop it.</p>
+                            </div>
+                            <div class="border-l-4 border-yellow-400 pl-3">
+                                <p class="font-bold text-yellow-400">COMMENTARY</p>
+                                <p>This is a cinema, not your living room. Whisper if you must.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="text-yellow-400">#MovieGoer</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-23', 'JuanKnows_Cinema', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-23', 'JuanKnows_Cinema', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-23', 'JuanKnows_Cinema', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- === CATEGORY: LAW === -->
+            <!-- CARD 4 -->
             <div class="card-wrapper" data-category="Law" onclick="selectCard(this)">
                 <div class="card-container theme-law" id="card-4">
                     <div class="card-header">
@@ -454,7 +547,7 @@
                 </div>
             </div>
 
-            <!-- CARD 14: LAW (NEW) -->
+            <!-- CARD 14 -->
             <div class="card-wrapper" data-category="Law" onclick="selectCard(this)">
                 <div class="card-container theme-law" id="card-14">
                     <div class="card-header">
@@ -484,7 +577,38 @@
                 </div>
             </div>
 
-            <!-- CARD 5: MEDICAL -->
+            <!-- CARD 24 -->
+            <div class="card-wrapper" data-category="Law" onclick="selectCard(this)">
+                <div class="card-container theme-law" id="card-24">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest font-bold">Digital Evidence</span>
+                        <i class="fas fa-mobile-screen text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-4 text-center" style="color:#78350f">Screenshots in Court?</h2>
+                        <div class="text-center space-y-3 font-serif">
+                            <p class="font-bold">Can a GC screenshot be used as evidence?</p>
+                            <p class="text-3xl font-bold">YES.</p>
+                            <p class="text-sm italic">Under the <br><strong>Rules on Electronic Evidence</strong></p>
+                            <p class="text-xs text-left mt-3 border-t border-amber-900 pt-2">
+                                Digital messages are admissible. Be careful what you type, even in "private" group chats. Libel laws apply online.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#CyberLibel</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-24', 'JuanKnows_Screenshots', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-24', 'JuanKnows_Screenshots', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-24', 'JuanKnows_Screenshots', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- === CATEGORY: MEDICAL === -->
+            <!-- CARD 5 -->
             <div class="card-wrapper" data-category="Medical" onclick="selectCard(this)">
                 <div class="card-container theme-medical" id="card-5">
                     <div class="card-header">
@@ -524,7 +648,7 @@
                 </div>
             </div>
 
-            <!-- CARD 15: MEDICAL (NEW) -->
+            <!-- CARD 15 -->
             <div class="card-wrapper" data-category="Medical" onclick="selectCard(this)">
                 <div class="card-container theme-medical" id="card-15">
                     <div class="card-header">
@@ -566,7 +690,38 @@
                 </div>
             </div>
 
-            <!-- CARD 6: INSPIRATION -->
+            <!-- CARD 25 -->
+            <div class="card-wrapper" data-category="Medical" onclick="selectCard(this)">
+                <div class="card-container theme-medical" id="card-25">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest font-bold">Meds 101</span>
+                        <i class="fas fa-pills text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-4 text-teal-900 text-center">Antibiotics for Flu?</h2>
+                        <div class="space-y-4 text-sm font-medium text-center">
+                            <p class="text-red-600 font-bold text-2xl">STOP.</p>
+                            <div class="bg-white bg-opacity-60 p-3 rounded text-left">
+                                <p><strong>Flu / Cold</strong> = <span class="text-red-600">VIRUS</span></p>
+                                <p><strong>Antibiotics</strong> = Kill <span class="text-teal-700">BACTERIA</span></p>
+                            </div>
+                            <p class="text-xs italic">Taking antibiotics for a virus doesn't cure you; it just creates "Superbugs" that are harder to kill later.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#DrugSafety</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-25', 'JuanKnows_Antibiotics', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-25', 'JuanKnows_Antibiotics', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-25', 'JuanKnows_Antibiotics', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- === CATEGORY: INSPIRATION === -->
+            <!-- CARD 6 -->
             <div class="card-wrapper" data-category="Inspiration" onclick="selectCard(this)">
                 <div class="card-container theme-inspiration" id="card-6">
                     <div class="card-header">
@@ -594,7 +749,7 @@
                 </div>
             </div>
 
-            <!-- CARD 16: INSPIRATION (NEW) -->
+            <!-- CARD 16 -->
             <div class="card-wrapper" data-category="Inspiration" onclick="selectCard(this)">
                 <div class="card-container theme-inspiration" id="card-16">
                     <div class="card-header">
@@ -621,7 +776,36 @@
                 </div>
             </div>
 
-            <!-- CARD 7: CYBER-WORLD -->
+            <!-- CARD 26 -->
+            <div class="card-wrapper" data-category="Inspiration" onclick="selectCard(this)">
+                <div class="card-container theme-inspiration" id="card-26">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest not-italic">Perspective</span>
+                        <i class="fas fa-mountain-sun text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="text-2xl font-bold mb-6 leading-snug">The "5 by 5" Rule</h2>
+                        <div class="text-sm not-italic space-y-4 px-2">
+                            <p class="text-lg">"If it won't matter in <span class="font-bold">5 years</span>..."</p>
+                            <p class="text-lg">"...don't spend more than <span class="font-bold">5 minutes</span> being upset by it."</p>
+                            <div class="border-t border-pink-400 w-1/2 mx-auto mt-4"></div>
+                            <p class="text-xs uppercase tracking-wide">Protect your peace.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer not-italic">
+                        <span>#MentalHealth</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-26', 'JuanKnows_5by5', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-26', 'JuanKnows_5by5', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-26', 'JuanKnows_5by5', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- === CATEGORY: CYBER-WORLD === -->
+            <!-- CARD 7 -->
             <div class="card-wrapper" data-category="Cyber-world" onclick="selectCard(this)">
                 <div class="card-container theme-cyber" id="card-7">
                     <div class="card-header">
@@ -657,7 +841,7 @@
                 </div>
             </div>
 
-            <!-- CARD 17: CYBER-WORLD (NEW) -->
+            <!-- CARD 17 -->
             <div class="card-wrapper" data-category="Cyber-world" onclick="selectCard(this)">
                 <div class="card-container theme-cyber" id="card-17">
                     <div class="card-header">
@@ -690,7 +874,40 @@
                 </div>
             </div>
 
-            <!-- CARD 8: HEALTH -->
+            <!-- CARD 27 -->
+            <div class="card-wrapper" data-category="Cyber-world" onclick="selectCard(this)">
+                <div class="card-container theme-cyber" id="card-27">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">> DANGER_ZONE</span>
+                        <i class="fas fa-user-secret text-xl"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-lg font-bold mb-4 text-green-400">> PUBLIC WIFI WARNING</h2>
+                        <div class="text-xs space-y-3 font-mono"> 
+                            <p>Using Free WiFi at the mall or coffee shop?</p>
+                            <div class="border border-red-500 p-2 text-red-400">
+                                <p class="font-bold">DO NOT:</p>
+                                <p>- Open Bank Apps</p>
+                                <p>- Log in to Work Email</p>
+                                <p>- Enter Credit Card details</p>
+                            </div>
+                            <p class="text-green-400">> Hackers can intercept this data easily. Use Data instead.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#CyberSec</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-27', 'JuanKnows_PublicWifi', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-27', 'JuanKnows_PublicWifi', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-27', 'JuanKnows_PublicWifi', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- === CATEGORY: HEALTH === -->
+            <!-- CARD 8 -->
             <div class="card-wrapper" data-category="Health" onclick="selectCard(this)">
                 <div class="card-container theme-health" id="card-8">
                     <div class="card-header">
@@ -726,7 +943,7 @@
                 </div>
             </div>
 
-            <!-- CARD 18: HEALTH (NEW) -->
+            <!-- CARD 18 -->
             <div class="card-wrapper" data-category="Health" onclick="selectCard(this)">
                 <div class="card-container theme-health" id="card-18">
                     <div class="card-header">
@@ -760,7 +977,43 @@
                 </div>
             </div>
 
-            <!-- CARD 9: HOUSEHOLD -->
+            <!-- CARD 28 -->
+            <div class="card-wrapper" data-category="Health" onclick="selectCard(this)">
+                <div class="card-container theme-health" id="card-28">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">Nutrition</span>
+                        <i class="fas fa-bowl-rice text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-2xl font-bold mb-4">Rice is NOT the Enemy</h2>
+                        <div class="space-y-3 text-sm">
+                            <p>Carbs are <span class="font-bold accent-text">ENERGY</span>.</p>
+                            <p>The real enemy is:</p>
+                            <div class="bg-white bg-opacity-40 p-3 rounded-lg flex items-center">
+                                <i class="fas fa-chair mr-3 accent-text"></i>
+                                <span>Sedentary Lifestyle (Not moving)</span>
+                            </div>
+                            <div class="bg-white bg-opacity-40 p-3 rounded-lg flex items-center">
+                                <i class="fas fa-pizza-slice mr-3 accent-text"></i>
+                                <span>Excessive Calories</span>
+                            </div>
+                            <p class="text-xs italic mt-2">Eat the rice. Just move your body.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#DietFacts</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-28', 'JuanKnows_Rice', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-28', 'JuanKnows_Rice', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-28', 'JuanKnows_Rice', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- === CATEGORY: HOUSEHOLD === -->
+            <!-- CARD 9 -->
             <div class="card-wrapper" data-category="Household" onclick="selectCard(this)">
                 <div class="card-container theme-household" id="card-9">
                     <div class="card-header">
@@ -788,7 +1041,7 @@
                 </div>
             </div>
 
-            <!-- CARD 19: HOUSEHOLD (NEW) -->
+            <!-- CARD 19 -->
             <div class="card-wrapper" data-category="Household" onclick="selectCard(this)">
                 <div class="card-container theme-household" id="card-19">
                     <div class="card-header">
@@ -824,7 +1077,40 @@
                 </div>
             </div>
 
-            <!-- CARD 10: FAMILY -->
+            <!-- CARD 29 -->
+            <div class="card-wrapper" data-category="Household" onclick="selectCard(this)">
+                <div class="card-container theme-household" id="card-29">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest text-red-800 font-bold">⚠️ DANGER</span>
+                        <i class="fas fa-skull-crossbones text-xl opacity-75 text-red-800"></i>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-4">NEVER Mix These Two:</h2>
+                        <div class="flex items-center justify-center space-x-2 text-lg font-bold mb-4">
+                            <span class="bg-white px-2 py-1 rounded">BLEACH</span>
+                            <span>+</span>
+                            <span class="bg-white px-2 py-1 rounded">VINEGAR</span>
+                        </div>
+                        <div class="text-sm space-y-2">
+                            <p>= <span class="font-bold text-red-800">CHLORINE GAS</span></p>
+                            <p>This creates a toxic chemical vapor that can damage your lungs and eyes instantly.</p>
+                            <p class="text-xs font-bold mt-2">Use them separately. Rinse thoroughly in between.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#SafetyFirst</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-29', 'JuanKnows_BleachDanger', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-29', 'JuanKnows_BleachDanger', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-29', 'JuanKnows_BleachDanger', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- === CATEGORY: FAMILY === -->
+            <!-- CARD 10 -->
             <div class="card-wrapper" data-category="Family" onclick="selectCard(this)">
                 <div class="card-container theme-family" id="card-10">
                     <div class="card-header">
@@ -856,7 +1142,7 @@
                 </div>
             </div>
 
-            <!-- CARD 20: FAMILY (NEW) -->
+            <!-- CARD 20 -->
             <div class="card-wrapper" data-category="Family" onclick="selectCard(this)">
                 <div class="card-container theme-family" id="card-20">
                     <div class="card-header">
@@ -892,6 +1178,33 @@
                     <button onclick="shareImage(event, 'card-20', 'JuanKnows_LoveLanguages', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
                     <button onclick="shareImage(event, 'card-20', 'JuanKnows_LoveLanguages', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
                     <button onclick="shareImage(event, 'card-20', 'JuanKnows_LoveLanguages', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- CARD 30 -->
+            <div class="card-wrapper" data-category="Family" onclick="selectCard(this)">
+                <div class="card-container theme-family" id="card-30">
+                    <div class="card-header">
+                        <span class="text-xs uppercase tracking-widest">Real Talk</span>
+                        <i class="fas fa-hand-holding-dollar text-xl opacity-75"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="text-xl font-bold mb-4">Children are NOT Retirement Plans.</h2>
+                        <div class="text-sm space-y-3 text-blue-900">
+                            <p>Supporting parents should be an act of <span class="font-bold border-b-2 border-blue-400">LOVE</span>.</p>
+                            <p>Not an act of <span class="font-bold border-b-2 border-blue-400">DEBT</span>.</p>
+                            <p class="text-xs italic mt-4 text-gray-500">Break the cycle of "Utang na Loob" that burdens the next generation.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>#HealthyBoundaries</span>
+                        <span class="opacity-50">@juanknows_ph</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button onclick="shareImage(event, 'card-30', 'JuanKnows_Retirement', 'facebook')" class="action-btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="shareImage(event, 'card-30', 'JuanKnows_Retirement', 'messenger')" class="action-btn btn-messenger"><i class="fab fa-facebook-messenger"></i></button>
+                    <button onclick="shareImage(event, 'card-30', 'JuanKnows_Retirement', 'download')" class="action-btn btn-download"><i class="fas fa-download"></i></button>
                 </div>
             </div>
 
